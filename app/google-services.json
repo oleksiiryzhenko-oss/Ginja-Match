@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "562785201888",
+    "project_id": "ginja-match",
+    "storage_bucket": "ginja-match.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:562785201888:android:9bbc38fa3855730a3dea85",
+        "android_client_info": {
+          "package_name": "com.ginjamatch.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4wN0qtGAQ9lWtpYe1RtYxHdJq0xlhOvM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,35 @@
+workflows:
+  ginja-match-android:
+    name: Ginja-Match APK + AAB
+    instance_type: mac_mini_m2
+    max_build_duration: 90
+    environment:
+      node: 22
+      java: 17
+      android_signing:
+        - ginja-match
+      vars:
+        ENABLE_JS_OBFUSCATION: "true"
+    scripts:
+      - name: Install dependencies
+        script: npm ci --include=dev
+      - name: Validate service connections
+        script: node scripts/check-project.cjs --release
+      - name: Generate Android project
+        script: npx expo prebuild --platform android --no-install
+      - name: Configure Android SDK
+        script: echo "sdk.dir=$ANDROID_SDK_ROOT" > android/local.properties
+      - name: Verify release signing
+        script: |
+          : "${CM_KEYSTORE_PATH:?Connect the actual Ginja-Match keystore in workflow android_signing}"
+          : "${CM_KEYSTORE_PASSWORD:?Missing keystore password}"
+          : "${CM_KEY_ALIAS:?Missing key alias}"
+          : "${CM_KEY_PASSWORD:?Missing key password}"
+      - name: Build signed APK and AAB
+        script: |
+          cd android
+          bash gradlew :app:assembleRelease :app:bundleRelease --console=plain
+    artifacts:
+      - android/app/build/outputs/apk/release/*.apk
+      - android/app/build/outputs/bundle/release/*.aab
+      - android/app/build/outputs/mapping/release/mapping.txt

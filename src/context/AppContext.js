@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import initialState from "../utils/initialState";
+import { removeDemoData } from "../utils/cleanupDemo.mjs";
 import { isState, uid, dayKey } from "../utils/model.mjs";
 const Context = createContext(null);
 const STORAGE_KEY = "@ginja-match/training/v1";
@@ -23,7 +24,7 @@ export function AppProvider({ children }) {
         const saved = raw ? JSON.parse(raw) : initialState;
         if (!isState(saved)) throw new Error("Geçersiz yerel veri");
         if (alive) {
-          setState(saved);
+          setState(removeDemoData(saved));
           writable.current = true;
         }
       })

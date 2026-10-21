@@ -1,5 +1,5 @@
 import React from "react";
-import { Alert, Share } from "react-native";
+import { Alert, Share, Linking } from "react-native";
 import { useApp } from "../context/AppContext";
 import { Screen, Card, Heading, Body, Button } from "../components/UI";
 export default function SettingsScreen({ navigation }) {
@@ -44,6 +44,13 @@ export default function SettingsScreen({ navigation }) {
         Bu uygulama bir antrenman günlüğüdür; profesyonel antrenörlük veya tıbbi
         tavsiye yerine geçmez.{" "}
       </Body>
+      <Button
+        title="Gizlilik politikası"
+        secondary
+        onPress={() => Linking.openURL("https://kaleidoscopic-longma-f712bf.netlify.app").catch(() => {
+          Alert.alert("Bağlantı açılamadı", "Lütfen tekrar deneyin.");
+        })}
+      />
       <Button
         title="Cihazdaki günlüğü sil"
         danger

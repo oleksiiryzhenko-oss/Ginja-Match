@@ -48,6 +48,7 @@ module.exports = ({ config }) => {
     updates: projectId
       ? {
           enabled: true,
+          requestHeaders: { "expo-channel-name": "production" },
           url: `https://u.expo.dev/${projectId}`,
           checkAutomatically: "NEVER",
           fallbackToCacheTimeout: 0,
